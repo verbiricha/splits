@@ -1,0 +1,52 @@
+.invoice {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.pay {
+  color: black;
+  margin-top: 15px;
+  width: 180px;
+  text-decoration: none;
+  background-color: #E8FF52;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 100px;
+  border: 0px;
+  outline: none;
+  display: inline-block;
+  padding: 8px 22px;
+  margin-bottom: 0;
+  font-size: 15px;
+  font-weight: normal;
+  line-height: 1.428571429;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  border: 2px solid #E8FF52;
+}
+
+.pay:hover {
+ color: #E8FF52;
+ background-color: black;
+ border: 2px solid #E8FF52;
+}
+
+.pay:active {
+ color: black;
+ background-color: #E8FF52;
+ border: 2px solid #E8FF52;
+}
+
+.pay:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

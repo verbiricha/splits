@@ -8,9 +8,18 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ant-design/icons": "4.0.0",
+    "axios": "^0.26.0",
+    "date-and-time": "^2.3.0",
+    "nanoid": "^3.3.1",
     "next": "12.0.10",
+    "qr-code-styling": "^1.6.0-rc.1",
+    "qrcode.react": "^2.0.0",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "rebass": "^4.0.7",
+    "redis": "^4.0.4",
+    "unique-names-generator": "^4.7.1"
   },
   "devDependencies": {
     "@types/node": "17.0.18",

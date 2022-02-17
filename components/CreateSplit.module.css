@@ -1,0 +1,20 @@
+.link {
+  color: #E8FF52;
+  border-bottom: 1px dotted #E8FF52;
+}
+
+.amount {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.includeOwner {
+  width: 100%;
+  font-size: 14px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+}

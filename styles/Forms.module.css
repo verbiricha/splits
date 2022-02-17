@@ -1,0 +1,160 @@
+.label {
+  color: #B2B2B2;
+  align-self: flex-start;
+  margin-bottom: 5px;
+}
+
+.input {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  display: inline-block;
+  height: 48px;
+  padding: 8px 12px;
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  background: #333;
+  box-sizing: border-box;
+  border-radius: 10px;
+  font-size: 15px;
+  color: #B2B2B2;
+  outline: none;
+}
+.input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.form {
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button {
+  color: black;
+  margin-top: 15px;
+  width: 200px;
+  text-decoration: none;
+  background-color: #E8FF52;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 100px;
+  border: 0px;
+  outline: none;
+  display: inline-block;
+  padding: 8px 22px;
+  margin-bottom: 0;
+  font-size: 15px;
+  font-weight: normal;
+  letter-spacing: .12rem;
+  line-height: 1.428571429;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  border: 2px solid #E8FF52;
+}
+
+.button:hover {
+ color: #E8FF52;
+ background-color: black;
+ border: 2px solid #E8FF52;
+}
+
+.button:active {
+ color: black;
+ background-color: #E8FF52;
+ border: 2px solid #E8FF52;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  display: inline-block;
+  height: 48px;
+  padding: 8px 12px;
+  min-width: 58px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  background: #333;
+  box-sizing: border-box;
+  border-radius: 10px;
+  font-size: 15px;
+  color: #B2B2B2;
+  outline: none;
+  margin-right: 10px;
+}
+
+.checkbox {
+  appearance: none;
+  display: inline-block;
+  padding: 3px;
+  height: 25px;
+  width: 24px;
+  background: #333;
+  box-sizing: border-box;
+  border-radius: 5px;
+  color: #B2B2B2;
+  outline: none;
+  margin-right: 10px;
+  position: relative;
+}
+
+.checkbox:checked {
+  background: #333;
+}
+
+.checkbox:checked:before {
+  content:"\2713";
+  color: #B2B2B2;
+  font-size: 18px;
+  position: absolute;
+  left: 5px;
+}
+
+.iconInput {
+  width: 100%;
+  position: relative;
+}
+
+.inputIcon {
+  position: absolute;
+  right: -30px;
+  bottom: 20px;
+}
+
+.inputIcon svg {
+  height: 25px;
+  width: 25px;
+  opacity: 0.7;
+}
+
+.inputRow {
+  width: 240px;
+}
+
+@media (min-width: 500px) {
+  .inputRow {
+    width: 420px;
+  }
+}
+
+.buttonRow {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
