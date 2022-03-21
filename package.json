@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "4.0.0",
+    "@types/nanoid-dictionary": "^4.2.0",
     "axios": "^0.26.0",
     "date-and-time": "^2.3.0",
     "nanoid": "^3.3.1",
