@@ -31,7 +31,7 @@ export default async function handler(
           currencies: currencies.filter((c: any) => c.isInvoiceable)
         })
       } else {
-        res.status(400).json({ error: "User can not receive on Strike" })
+        res.status(404).json({ error: "User can not receive on Strike" })
       }
     } catch (error) {
       // @ts-expect-error

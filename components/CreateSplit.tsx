@@ -95,14 +95,16 @@ const CreateSplit = () => {
   const [error, setError] = useState()
   const [searchedUser, setSearchedUser] = useState('')
   const validUsers = useRef(new Set())
+  const [userCurrencies, setUserCurrencies] = useState<Record<string, Currency[]>>({})
   const [user, setUser] = useState()
   const [people, setPeople] = useState('')
   const [includeOwner, setIncludeOwner] = useState(true)
   const [amount, setAmount] = useState('21')
   const [description, setDescription] = useState('dinner')
-  const [currencies, setCurrencies] = useState<Currency[]>()
   const [currency, setCurrency] = useState<string>()
   const [isCreatingSplit, setIsCreatingSplit] = useState(false)
+
+  const currencies = userCurrencies[searchedUser]
 
   const hasUser = validUsers.current.has(searchedUser)
   const actualPeople = people.split(',').map((s) => s.trim()).filter((s) => s !== '')
@@ -110,13 +112,16 @@ const CreateSplit = () => {
 
   const onUserChange = (name: string) => {
     setSearchedUser(name)
+    const currencies = userCurrencies[name]
+    if (currencies) {
+      setCurrency(currencies[0]?.currency)
+    }
   }
 
   const onUser = (user: any) => {
     const { username, currencies } = user
     validUsers.current.add(username)
-    setCurrencies(currencies)
-    setCurrency(currencies[0]?.currency)
+    setUserCurrencies({...userCurrencies, [username]: currencies })
   }
 
   const buttonStyle = isCreatingSplit ? { cursor: 'wait' } : {}
