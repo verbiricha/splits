@@ -1,64 +1,61 @@
-import { useState, useEffect, useRef } from "react";
-import createQRConfig from "./qrCodeConfig";
+import QRCodeReact from "qrcode.react";
+import { Center, Box, Flex } from "@chakra-ui/react";
 import styles from "./QRCode.module.css";
 
-export default function QRCode({
-  data,
-  color,
-  expired,
-  animationDuration,
-  onClick,
-}) {
-  const ref = useRef();
-  const [qrCodeConfig] = useState(createQRConfig())
-
-  useEffect(() => {
-    qrCodeConfig.append(ref.current);
-  }, []);
-
-  useEffect(() => {
-    qrCodeConfig.update({ data });
-  }, [data]);
+export default function QRCode({ data, animationDuration = 0 }) {
+  const brandColor = '#bada55'
+  const size = 280;
 
   return (
-    <div className={styles.root}>
-      {!expired &&
-        <div className={styles.svgBorderContainer} onClick={onClick}>
-          <svg width="240px" height="240px" viewBox="0 0 240 240">
+    <Box position="relative" w={280}>
+      <Box position="absolute">
+        <a href={`lightning:${data}`}>
+          <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
             <rect
               x="2"
               y="2"
-              width="236"
-              height="236"
+              width={size - 4}
+              height={size - 4}
               fill="none"
-              stroke={color}
+              stroke={brandColor}
               strokeWidth="4"
               rx="28"
             />
           </svg>
-          <svg width="240px" height="240px" viewBox="0 0 240 240">
-            <rect
-              x="2"
-              y="2"
-              width="236"
-              height="236"
-              fill="none"
-              stroke="#1A1A1A"
-              strokeWidth="6"
-              strokeDashoffset={960}
-              strokeDasharray={960}
-              rx="28"
-              style={{ animationDuration: expired ? 0 : `${animationDuration}s` }}
-            />
-          </svg>
-        </div>
-      }
-      <div
-        className={`${styles.qrCodeContainer} ${
-          expired ? styles.expired : undefined
-        }`}
-        ref={ref}
-      />
-    </div>
+          <Box position="absolute" top={0} left={0}>
+            <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+              <rect
+                className={styles.rect}
+                x="2"
+                y="2"
+                width={size - 4}
+                height={size - 4}
+                fill="none"
+                stroke="#1A1A1A"
+                strokeWidth="6"
+                strokeDashoffset={size * 4}
+                strokeDasharray={size * 4}
+                rx="28"
+                style={{
+                  animationDuration: `${animationDuration}s`,
+                }}
+              />
+            </svg>
+          </Box>
+        </a>
+      </Box>
+      <Flex
+        w={size}
+        h={size}
+        bg="#1a1a1a"
+        borderRadius={30}
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Center bg="white" borderRadius={8} boxSizing="border-box" p={2}>
+          <QRCodeReact value={data} size={208} />
+        </Center>
+      </Flex>
+    </Box>
   );
 }
