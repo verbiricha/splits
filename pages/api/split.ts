@@ -1,12 +1,17 @@
 import axios from 'axios'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { nanoid } from 'nanoid'
+
+import { customAlphabet } from 'nanoid'
+import { nolookalikes } from 'nanoid-dictionary'
+
 import { createSplit, setSplit } from '../../lib/splits'
 import { getUser, createInvoice, getInvoice } from '../../lib/strike'
 
 
 interface Split {
 }
+
+const generateId = customAlphabet(nolookalikes, 12)
 
 export default async function handler(
   req: NextApiRequest,
@@ -21,7 +26,7 @@ export default async function handler(
     const { user } = req.body
     try {
       const strikeUser = await getUser(user)
-      const id = nanoid()
+      const id = generateId()
       const split = await createSplit(id, {...req.body, strikeUser })
       await setSplit(id, split)
       res.status(200).json(split)

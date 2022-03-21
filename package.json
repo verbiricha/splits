@@ -12,6 +12,7 @@
     "axios": "^0.26.0",
     "date-and-time": "^2.3.0",
     "nanoid": "^3.3.1",
+    "nanoid-dictionary": "^4.3.0",
     "next": "12.0.10",
     "qr-code-styling": "^1.6.0-rc.1",
     "qrcode.react": "^2.0.0",
