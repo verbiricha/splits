@@ -1,7 +1,7 @@
 import QR from './QR'
 import styles from './Invoice.module.css'
 
-const Invoice = ({ state, quoteId, lnInvoice, expiration, expirationInSec, state }) => {
+const Invoice = ({ quoteId, lnInvoice, expiration, expirationInSec, state }) => {
   const isPaid = state === 'PAID'
   const expirationDate = Date.parse(expiration) 
   const now = new Date()

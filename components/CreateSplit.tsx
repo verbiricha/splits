@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react'
+import type { FC } from 'react'
 
 import { CloseCircleOutlined, CheckCircleOutlined, LoadingOutlined } from '@ant-design/icons'
 
@@ -10,11 +11,19 @@ const NOT_FOUND = 'NOT_FOUND'
 const ERROR = 'ERROR'
 const VALID_USER = 'VALID_USER'
 
-const SearchUser = ({ isDisabled, onUserChange, onUser }) => {
-  const [user, setUser] = useState('')
-  const [users, setUsers] = useState({})
+type SearchUserState = typeof LOADING | typeof NOT_FOUND | typeof ERROR | typeof VALID_USER
 
-  const searchUser = (name) => {
+interface SearchUserProps {
+  isDisabled: boolean
+  onUserChange: (u: string) => void
+  onUser: (u: string) => void
+}
+
+const SearchUser: FC<SearchUserProps> = ({ isDisabled, onUserChange, onUser }) => {
+  const [user, setUser] = useState('')
+  const [users, setUsers] = useState<Record<string, SearchUserState>>({})
+
+  const searchUser = (name: string) => {
     setUsers({...users, [name]: LOADING })
     fetch(`/api/user/${name}`)
       .then((res) => {
@@ -35,7 +44,7 @@ const SearchUser = ({ isDisabled, onUserChange, onUser }) => {
       })
   }
 
-  const changeUser = (name) => {
+  const changeUser = (name: string) => {
     onUserChange(name)
     setUser(name)
     if (!users[name] && name !== ''){
@@ -43,7 +52,7 @@ const SearchUser = ({ isDisabled, onUserChange, onUser }) => {
     }
   }
 
-  const getIcon = (state) => {
+  const getIcon = (state: SearchUserState) => {
     switch(state) {
       case LOADING:
         return <LoadingOutlined style={{ color: '#E8FF52' }} />
@@ -78,6 +87,10 @@ const SearchUser = ({ isDisabled, onUserChange, onUser }) => {
   )
 }
 
+type Currency = {
+  currency: string
+}
+
 const CreateSplit = () => {
   const [error, setError] = useState()
   const [searchedUser, setSearchedUser] = useState('')
@@ -85,21 +98,22 @@ const CreateSplit = () => {
   const [user, setUser] = useState()
   const [people, setPeople] = useState('')
   const [includeOwner, setIncludeOwner] = useState(true)
-  const [amount, setAmount] = useState(21)
+  const [amount, setAmount] = useState('21')
   const [description, setDescription] = useState('dinner')
-  const [currencies, setCurrencies] = useState()
-  const [currency, setCurrency] = useState()
+  const [currencies, setCurrencies] = useState<Currency[]>()
+  const [currency, setCurrency] = useState<string>()
   const [isCreatingSplit, setIsCreatingSplit] = useState(false)
 
   const hasUser = validUsers.current.has(searchedUser)
   const actualPeople = people.split(',').map((s) => s.trim()).filter((s) => s !== '')
   const isSplitComplete = hasUser && actualPeople.length >= 1
 
-  const onUserChange = (name) => {
+  const onUserChange = (name: string) => {
     setSearchedUser(name)
   }
 
-  const onUser = ({ username, currencies }) => {
+  const onUser = (user: any) => {
+    const { username, currencies } = user
     validUsers.current.add(username)
     setCurrencies(currencies)
     setCurrency(currencies[0]?.currency)
@@ -122,7 +136,7 @@ const CreateSplit = () => {
             value={currency}
             disabled={!hasUser || currencies && currencies.length === 1 || isCreatingSplit}
             onChange={(ev) => setCurrency(ev.target.value)}>
-            {currencies && currencies.map(({ currency }) => <option value={currency}>{currency}</option>)}
+            {currencies && currencies.map(({ currency }) => <option key={currency} value={currency}>{currency}</option>)}
           </select>
           <input
             className={formStyles.input}

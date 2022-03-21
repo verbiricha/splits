@@ -18,6 +18,7 @@ export default async function handler(
       console.error(error)
       res.status(404).json({ error: "Split not found" })
     } finally {
+      // @ts-expect-error
       resolve()
     }
   })

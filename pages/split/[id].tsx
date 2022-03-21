@@ -56,8 +56,10 @@ const CopyIcon = ({...props}) => {
   )
 }
 
+// @ts-expect-error
 const Split: NextPage = ({ data }) => {
   const [split, setSplit] = useState(data)
+  // @ts-expect-error
   const { href, host, pathname } = useLocation()
   const { id, currency, description, invoices, amount, user, strikeUser } = split
 
@@ -70,7 +72,7 @@ const Split: NextPage = ({ data }) => {
     }
   }, 2000)
 
-  const invoiceComponents = invoices.map((invoice) => {
+  const invoiceComponents = invoices.map((invoice: any) => {
     const { name, quote, state } = invoice
     const paid = state === 'PAID'
     const invoiceAmount = Number(quote.targetAmount.amount).toFixed(2)
@@ -84,11 +86,17 @@ const Split: NextPage = ({ data }) => {
   })
   
   const paidAmount = invoices
+  // @ts-expect-error
   .filter(({ state }) => state === 'PAID')
+  // @ts-expect-error
   .reduce((acc, { quote }) => acc + Number(quote.targetAmount.amount), 0)
+
   const unpaidAmount = invoices
+  // @ts-expect-error
   .filter(({ state }) => state !== 'PAID')
+  // @ts-expect-error
   .reduce((acc, { quote }) => acc + Number(quote.targetAmount.amount), 0)
+
   const ownerPaidAmount = amount - paidAmount
   const owed = split?.paid 
     ? ownerPaidAmount === 0 ? <p><strong>{user}</strong> received <strong>{paidAmount.toFixed(2)} {currency}</strong></p> : <p><strong>{user}</strong> paid <strong>{ownerPaidAmount.toFixed(2)} {currency}</strong></p>  
@@ -149,6 +157,7 @@ const Split: NextPage = ({ data }) => {
   )
 }
 
+// @ts-expect-error
 export async function getServerSideProps({ params }) {
   const { id } = params
   const split = await getSplit(id)

@@ -13,7 +13,7 @@ export default async function handler(
   res: NextApiResponse<Split>
 ) {
   if (req.method !== 'POST') {
-    res.status(405).json()
+    res.status(405).json({ error: "Method not allowed, only POST" })
     return Promise.resolve()
   }
 
@@ -29,6 +29,7 @@ export default async function handler(
       console.error(error)
       res.status(400).json({ error: "Error creating split" })
     } finally {
+      // @ts-expect-error
       resolve()
     }
   })
