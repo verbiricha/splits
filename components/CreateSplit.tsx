@@ -210,7 +210,7 @@ const CreateSplit = () => {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
               },
-              body: JSON.stringify({ user: searchedUser, amount: Number(amount), currency, people: actualPeople, description, includeOwner })
+              body: JSON.stringify({ user: searchedUser, amount: Number(amount), currency: currency || 'USD', people: actualPeople, description, includeOwner })
             })
             .then((r) => r.json())
             .then(({ id }) => {

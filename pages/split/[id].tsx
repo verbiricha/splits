@@ -63,6 +63,8 @@ const Split: NextPage = ({ data }) => {
   const { href, host, pathname } = useLocation()
   const { id, currency, description, invoices, amount, user, strikeUser } = split
 
+  const splitDescription = `${description} ${description  ? '-' : ''} ${amount.toFixed(2)} ${currency}`
+
   useInterval(() => {
     if (!split?.paid) {
       fetch(`/api/split/${id}`)
@@ -113,9 +115,12 @@ const Split: NextPage = ({ data }) => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Splits</title>
-        <meta name="description" content="Split bills with your friends, instantly" />
+        <title>Splits ⚡ - {description}</title>
+        <meta name="description" content={splitDescription} />
         <link rel="icon" href="/favicon.ico" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
       </Head>
 
       <main className={styles.main}>
@@ -123,7 +128,7 @@ const Split: NextPage = ({ data }) => {
           <h1 className={styles.title}>
             Splits
           </h1>
-          <h2>{description} {description  ? '-' : ''} {amount.toFixed(2)} {currency}</h2>
+          <h2>{splitDescription}</h2>
         </header>
         <div className={styles.content}>
           <div className={splitStyles.shareLink} onClick={() => copy(href)}>
